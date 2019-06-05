@@ -1,5 +1,5 @@
 {
-  "name": "td-pks",
+  "name": "poker-td",
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^4.0.2",
