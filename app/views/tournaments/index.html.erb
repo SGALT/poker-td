@@ -1,0 +1,14 @@
+<div class="container">
+  <ul class="list-group-flush">
+    <% @tournaments.each do |tournament| %>
+      <li class="list-group-item border border-dark d-flex justify-content-between mb-2">
+        <%= tournament.title %>
+        <%= link_to 'Gestion', edit_tournament_path(tournament) %>
+        <%= link_to 'Screen', tournament_path(tournament) %>
+        <%= link_to 'Supprimer', tournament_path(tournament), method: :delete, data: { confirm: "Etes vous sûr ?" } %>
+        <%= link_to 'copier le tournoi', tournament_copy_path(tournament), method: :post %>
+      </li>
+    <% end %>
+  <%= link_to 'Nouveau tournoi', new_tournament_path, class: 'btn btn-dark mb-4 d-block mx-auto' %>
+  </ul>
+</div>

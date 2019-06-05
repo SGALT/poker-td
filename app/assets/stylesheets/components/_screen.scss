@@ -1,0 +1,73 @@
+.screen {
+  background-color: black;
+  color: white;
+  height: 100vh;
+  h1 {
+    font-size: 5rem;
+  }
+  .break {
+    margin-top: 18px;
+  }
+  .paused {
+    margin-top: -45px;
+  }
+  .started {
+    margin-top: -45px;
+  }
+  .ended {
+    font-size: 3rem;
+    margin-top: 50px;
+  }
+  .sub-title {
+    font-size: 2rem;
+  }
+  .first-line {
+    height: 32vh;
+    padding-top: 85px;
+  }
+  .second-line {
+    height: 25vh;
+    padding-top: 5px;
+  }
+  .fourth-line {
+    height: 21vh;
+    margin-top: -8px;
+  }
+  .blinds {
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    height: 73px;
+    font-size: 3.5rem;
+  }
+  .blind {
+    margin-bottom: 0px !important;
+    color: black;
+  }
+  .ante {
+    font-size: 2rem;
+    border-bottom: 2px solid white;
+  }
+  .nextblind {
+    margin-bottom: 0px !important;
+  }
+  .title {
+    width: 73%;
+  }
+  .big {
+    font-size: 12.5rem;
+  }
+  .black {
+    color: black;
+    opacity: 0;
+  }
+  .rem-2 {
+    font-size: 2rem;
+  }
+  .end-line {
+    font-size: 1.3rem;
+  }
+  .photo {
+    height: 200px;
+    width: 200px;
+  }
+}

@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <%= simple_form_for [@tournament, @round] do |f| %>
+    <%= f.input :order_nb %>
+    <%= f.input :small_blind %>
+    <%= f.input :big_blind %>
+    <%= f.input :ante %>
+    <%= f.input :duration %>
+    <%= f.input :category,collection: [ "round", "break"] %> <!-- collection of type -->
+    <%= f.button :submit, class: 'btn btn-danger btn-block' %>
+  <% end %>
+<br>
+  <%= link_to "Gestion", edit_tournament_path(@tournament), class: 'btn btn-dark btn-block' %>
+</div>
+<div class="container">
+  <h2 class="text-center">ROUND LIST</h2>
+  <ul class="list-group pb-5 mb-5">
+    <li class="d-flex flex-rox mb-1 justify-content-between">
+      <span class="font-weight-bold">Categorie</span>
+      <span class="font-weight-bold">Small Blind</span>
+      <span class="font-weight-bold">Big Blind</span>
+      <span class="font-weight-bold">Durée</span>
+      <span class="font-weight-bold">Numéro</span>
+      <span class="font-weight-bold">Etat</span>
+    </li>
+    <% @tournament.rounds.order(:order_nb).each do |round| %>
+    <li class="d-flex flex-rox justify-content-between mb-1">
+      <span><%= round.category %></span>
+      <span><%= round.small_blind %></span>
+      <span><%= round.big_blind %></span>
+      <span><%= round.duration %> minutes</span>
+      <span><%= round.order_nb %></span>
+      <span><%= round.state %></span>
+    </li>
+  <% end %>
+  </ul>
+</div>
