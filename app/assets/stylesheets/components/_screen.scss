@@ -23,7 +23,6 @@
   }
   .first-line {
     height: 32vh;
-    padding-top: 85px;
   }
   .second-line {
     height: 25vh;
@@ -34,14 +33,11 @@
     margin-top: -8px;
   }
   .blinds {
-    border-top: 2px solid white;
-    border-bottom: 2px solid white;
-    height: 73px;
     font-size: 3.5rem;
+    width: 65vw;
   }
   .blind {
-    margin-bottom: 0px !important;
-    color: black;
+    width: 15vw;
   }
   .ante {
     font-size: 2rem;

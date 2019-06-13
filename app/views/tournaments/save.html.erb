@@ -1,0 +1,133 @@
+<div class="screen container-fluid">
+
+  <!-- FIRST LINE SHOW -->
+  <div class="first-line d-flex flex-column align-items-end justify-content-center">
+      <h1 class="title text-uppercase text-center border-bottom border-white d-block mx-auto" style="color: <%= @tournament.color %>;">
+        <%= @tournament.title %>
+      </h1>
+      <p class="title sub-title text-capitalize text-center border-bottom border-white d-block mx-auto font-weight-bold">
+        <% if @tournament.sub_title %>
+          <%= @tournament.sub_title %>
+        <% end %>
+      </p>
+  </div>
+
+  <!-- SECOND LINE SHOW -->
+  <div class="second-line title row mx-auto">
+    <div class="logo col-3 d-flex align-items-start justify-content-center">
+      <%= image_tag 'logo.png', class: "photo" %>
+    </div>
+    <!-- CLOCK -->
+    <div class="clock col-6 d-flex align-items-start justify-content-center">
+
+      <% if @tournament_round %>
+        <span class="time-data" data-url="<%= @tournament_round.ends_at %>">
+        </span>
+      <% end %>
+
+      <!-- countdown program -->
+      <% if @tournament_round && @tournament_round.ends_at.nil? %>
+        <p class="big paused font-weight-bold">
+          <% min = (@tournament_round.counter / 60).to_i %>
+          <% sec = (@tournament_round.counter % ((1000 * 60) / 1000)).to_i %>
+          <% if min > 9 && sec > 9 %>
+            <%= min %>:<%= sec %>
+          <% elsif min > 9 && sec <= 9 %>
+            <%= min %>:0<%= sec %>
+          <% elsif min < 9 && sec > 9 %>
+            0<% min %>:<%= sec %>
+          <% elsif min < 9 && sec <= 9 %>
+            0<%= min %>:0<%= sec %>
+          <% end %>
+        </p>
+      <% else %>
+        <% if @tournament.rounds.order(:order_nb).last.ended? %>
+          <p class="font-weight-bold ended">TOURNOI TERMINE</p>
+        <% else %>
+          <p id="countdown" class="big started font-weight-bold"></p>
+        <% end %>
+      <% end %>
+    </div>
+    <!-- /CLOCK -->
+    <div class="logo col-3 d-flex align-items-start justify-content-center">
+      <%= image_tag 'logo.png', class: "photo" %>
+    </div>
+  </div>
+
+  <!-- THIRD LINE SHOW -->
+  <div class="rem-2 break text-center">
+    <p>Prochaine pause dans
+      <% if @tournament_round && (@tournament_round.ends_at.nil? || @tournament_round.category == "break") %>
+        <span id="nobreak">-- : --</span>
+      <% else %>
+        <span id="breakdown">
+        </span>
+      <% end %>
+    </p>
+    <span class="next-break" data-url="<%= @tournament.next_break %>"></span>
+  </div>
+
+  <!-- FOURTH LINE SHOW -->
+  <div class="fourth-line text-center">
+    <div class="title blinds text-center d-block mx-auto d-flex align-items-center justify-content-center" style="background-color: <%= @tournament.color %>; ">
+      <p class="blind font-weight-bold">
+        <% if @tournament_round && @tournament_round.small_blind != 0 && @tournament_round.category == 'round' %>
+          Blinds : <%= number_with_delimiter(@tournament_round.small_blind, :delimiter => '') %> - <%= number_with_delimiter(@tournament_round.big_blind, :delimiter => '') %>
+        <% elsif @tournament_round && @tournament_round.category == 'break' %>
+          PAUSE
+        <% else %>
+          -- / --
+        <% end %>
+      </p>
+    </div>
+    <div class="title ante text-center d-block mx-auto" style="background-color: <%= @tournament.color %>; ">
+      <p class="blind font-weight-bold">
+        <% if @tournament_round && @tournament_round.ante != 0 %>
+          Ante : <%= number_with_delimiter(@tournament_round.ante, :delimiter => '') %>
+        <% else %>
+          Ante : --
+        <% end %>
+      </p>
+    </div>
+    <div class="title rem-2 text-center border-bottom border-white d-block mx-auto">
+      <p class="nextblind">
+        Prochaines Blinds :
+        <% if @tournament_round && @next_round && @next_round.category == "round" %>
+          <%= number_with_delimiter(@next_round.small_blind, :delimiter => ' ')%> - <%= number_with_delimiter(@next_round.big_blind, :delimiter => ' ')%>
+        <% elsif @tournament_round && @next_round && @next_round.category == "break" %>
+          PAUSE
+        <% else %>
+          -- / --
+        <% end %>
+      </p>
+    </div>
+  </div>
+
+  <!-- FIFTH LINE SHOW -->
+  <div class="end-line title d-flex justify-content-around d-block mx-auto">
+    <div class="text-center">
+      <p>
+        Joueurs Inscrits :
+        <%= @tournament.attendees_nb %>
+      </p>
+    </div>
+    <div>
+      <p class="remain">
+      Joueurs Restants :
+      <%= @tournament.remaining_attendees %>
+      </p>
+    </div>
+    <div class="text-center">
+      <p>
+        Tapis Moyen :
+        <% total_chips = @tournament.starting_stack * @tournament.attendees_nb %>
+        <% if @tournament.remaining_attendees != 0 && @tournament.remaining_attendees %>
+          <%= number_with_delimiter(total_chips / @tournament.remaining_attendees, :delimiter => ' ') %>
+        <% else %>
+          --
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>
+

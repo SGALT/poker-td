@@ -5,8 +5,8 @@
     <%= f.input :sub_title, label: 'Sous-Titre' %>
     <%= f.input :attendees_nb, label: 'Nb Inscrits', input_html: { min: 0 } %>
     <%= f.input :starting_stack, label: 'Stack de départ', input_html: { min: 0, step: 500 } %>
-    <%= f.input :color, label: 'Thème couleur', as: :color %>
-    <%= f.input :font_color, label: 'Couleur de Police', as: :color %>
+    <%= f.input :color, label: 'Thème couleur blocks', as: :color %>
+    <%= f.input :font_color, label: 'Thème couleur fond', as: :color %>
     <%= f.button :submit, class: 'btn btn-danger btn-block' %>
   <% end %>
 <br>
