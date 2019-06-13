@@ -1,24 +1,37 @@
-<div class="screen container-fluid">
+<div class="screen container-fluid" style="background-color: <%= @tournament.font_color %>;">
 
   <!-- FIRST LINE SHOW -->
-  <div class="first-line d-flex flex-column align-items-end justify-content-center">
-      <h1 class="title text-uppercase text-center border-bottom border-white d-block mx-auto" style="color: <%= @tournament.color %>;">
+  <div class="pt-4 d-flex justify-content-around align-items-center">
+    <div class="logo">
+      <%= image_tag 'logo.png', class: "photo" %>
+    </div>
+    <div class="first-line d-flex flex-column justify-content-center">
+      <h1 class="text-uppercase text-center border-bottom border-white d-block mx-auto" style="color: <%= @tournament.color %>;">
         <%= @tournament.title %>
       </h1>
-      <p class="title sub-title text-capitalize text-center border-bottom border-white d-block mx-auto font-weight-bold">
+      <h2 class="text-capitalize text-center border-bottom border-white d-block mx-auto">
         <% if @tournament.sub_title %>
           <%= @tournament.sub_title %>
         <% end %>
-      </p>
+      </h2>
+    </div>
+    <div class="logo">
+      <%= image_tag 'logo.png', class: "photo" %>
+    </div>
   </div>
 
   <!-- SECOND LINE SHOW -->
-  <div class="second-line title row mx-auto">
-    <div class="logo col-3 d-flex align-items-start justify-content-center">
-      <%= image_tag 'logo.png', class: "photo" %>
-    </div>
     <!-- CLOCK -->
-    <div class="clock col-6 d-flex align-items-start justify-content-center">
+  <div class="row pt-3">
+    <div class="rem-2 col-3 text-center d-flex flex-column align-items-center justify-content-center">
+      <p>
+        Joueurs Inscrits :
+      </p>
+      <p>
+        <%= @tournament.attendees_nb %>
+      </p>
+    </div>
+    <div class="col-6 d-flex align-items-start justify-content-center">
 
       <% if @tournament_round %>
         <span class="time-data" data-url="<%= @tournament_round.ends_at %>">
@@ -48,29 +61,35 @@
         <% end %>
       <% end %>
     </div>
-    <!-- /CLOCK -->
-    <div class="logo col-3 d-flex align-items-start justify-content-center">
-      <%= image_tag 'logo.png', class: "photo" %>
+    <div class="col-3 d-flex flex-column align-items-center justify-content-center rem-2">
+      <p>
+        Joueurs Restants :
+      </p>
+      <p>
+        <%= @tournament.remaining_attendees %>
+      </p>
     </div>
   </div>
+    <!-- /CLOCK -->
 
   <!-- THIRD LINE SHOW -->
-  <div class="rem-2 break text-center">
-    <p>Prochaine pause dans
-      <% if @tournament_round && (@tournament_round.ends_at.nil? || @tournament_round.category == "break") %>
-        <span id="nobreak">-- : --</span>
-      <% else %>
-        <span id="breakdown">
-        </span>
-      <% end %>
-    </p>
+  <div class="pt-3 container-fluid d-flex justify-content-around align-self-stretch">
+    <div class="blind rem-2 text-center border border-dark rounded d-flex justify-content-center flex-column" style="background-color: <%= @tournament.color %>;">
+      <p>
+        Pause dans :
+      </p>
+      <p>
+        <% if @tournament_round && (@tournament_round.ends_at.nil? || @tournament_round.category == "break") %>
+          <span id="nobreak">-- : --</span>
+        <% else %>
+          <span id="breakdown">
+          </span>
+        <% end %>
+      </p>
+    </div>
     <span class="next-break" data-url="<%= @tournament.next_break %>"></span>
-  </div>
-
-  <!-- FOURTH LINE SHOW -->
-  <div class="fourth-line text-center">
-    <div class="title blinds text-center d-block mx-auto d-flex align-items-center justify-content-center" style="background-color: <%= @tournament.color %>; ">
-      <p class="blind font-weight-bold">
+    <div class="blinds text-center d-block mx-auto d-flex align-items-center justify-content-center flex-column rounded border border-dark" style="background-color: <%= @tournament.color %>; ">
+      <p class="font-weight-bold">
         <% if @tournament_round && @tournament_round.small_blind != 0 && @tournament_round.category == 'round' %>
           Blinds : <%= number_with_delimiter(@tournament_round.small_blind, :delimiter => '') %> - <%= number_with_delimiter(@tournament_round.big_blind, :delimiter => '') %>
         <% elsif @tournament_round && @tournament_round.category == 'break' %>
@@ -79,9 +98,7 @@
           -- / --
         <% end %>
       </p>
-    </div>
-    <div class="title ante text-center d-block mx-auto" style="background-color: <%= @tournament.color %>; ">
-      <p class="blind font-weight-bold">
+      <p class="font-weight-bold">
         <% if @tournament_round && @tournament_round.ante != 0 %>
           Ante : <%= number_with_delimiter(@tournament_round.ante, :delimiter => '') %>
         <% else %>
@@ -89,37 +106,11 @@
         <% end %>
       </p>
     </div>
-    <div class="title rem-2 text-center border-bottom border-white d-block mx-auto">
-      <p class="nextblind">
-        Prochaines Blinds :
-        <% if @tournament_round && @next_round && @next_round.category == "round" %>
-          <%= number_with_delimiter(@next_round.small_blind, :delimiter => ' ')%> - <%= number_with_delimiter(@next_round.big_blind, :delimiter => ' ')%>
-        <% elsif @tournament_round && @next_round && @next_round.category == "break" %>
-          PAUSE
-        <% else %>
-          -- / --
-        <% end %>
-      </p>
-    </div>
-  </div>
-
-  <!-- FIFTH LINE SHOW -->
-  <div class="end-line title d-flex justify-content-around d-block mx-auto">
-    <div class="text-center">
-      <p>
-        Joueurs Inscrits :
-        <%= @tournament.attendees_nb %>
-      </p>
-    </div>
-    <div>
-      <p class="remain">
-      Joueurs Restants :
-      <%= @tournament.remaining_attendees %>
-      </p>
-    </div>
-    <div class="text-center">
+    <div class="blind rem-2 text-center border border-dark rounded d-flex justify-content-center flex-column" style="background-color: <%= @tournament.color %>;">
       <p>
         Tapis Moyen :
+      </p>
+      <p>
         <% total_chips = @tournament.starting_stack * @tournament.attendees_nb %>
         <% if @tournament.remaining_attendees != 0 && @tournament.remaining_attendees %>
           <%= number_with_delimiter(total_chips / @tournament.remaining_attendees, :delimiter => ' ') %>

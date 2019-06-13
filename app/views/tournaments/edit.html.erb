@@ -52,7 +52,8 @@
 <!-- END OF CLOCK -->
 
 
-    <%= f.input :color, label: 'Thème', as: :color %>
+    <%= f.input :color, label: 'Thème couleur blocks', as: :color %>
+    <%= f.input :font_color, label: 'Thème couleur fond', as: :color %>
     <%= f.button :submit, class: 'btn btn-danger btn-block' %>
   <% end %>
 <br>
@@ -64,7 +65,7 @@
 <div class="container">
   <h2 class="text-center">ROUND LIST</h2>
   <ul class="list-group pb-5 mb-5">
-    <li class="d-flex flex-rox mb-1 justify-content-between">
+    <li class="d-flex flex-row mb-1 justify-content-between">
       <span class="font-weight-bold">Categorie</span>
       <span class="font-weight-bold">Small Blind</span>
       <span class="font-weight-bold">Big Blind</span>
@@ -74,7 +75,7 @@
       <span class="font-weight-bold">Tools</span>
     </li>
     <% @tournament.rounds.order(:order_nb).each do |round| %>
-      <li class="d-flex flex-rox justify-content-between mb-1">
+      <li class="d-flex flex-row justify-content-between mb-1">
         <span><%= round.category %></span>
         <span><%= round.small_blind %></span>
         <span><%= round.big_blind %></span>

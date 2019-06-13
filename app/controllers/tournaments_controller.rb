@@ -108,6 +108,6 @@ class TournamentsController < ApplicationController
   end
 
   def tournament_params
-    params.require(:tournament).permit(:title, :sub_title,:attendees_nb, :starting_stack, :color, :photo, :photo_cache, :photo_opt, :photo_opt_cache, :remaining_attendees, :busted)
+    params.require(:tournament).permit(:title, :sub_title,:attendees_nb, :starting_stack, :color, :font_color, :remaining_attendees, :busted)
   end
 end
