@@ -3,13 +3,10 @@
     <%= @tournament.errors.full_messages.join(', ') %>
     <%= f.input :title, label: 'Titre' %>
     <%= f.input :sub_title, label: 'Sous-Titre' %>
-    <%= f.input :photo, label: 'Photo' %>
-    <%= f.input :photo_cache, as: :hidden %>
-    <%= f.input :photo_opt, label: 'Photo' %>
-    <%= f.input :photo_opt_cache, as: :hidden %>
     <%= f.input :attendees_nb, label: 'Nb Inscrits', input_html: { min: 0 } %>
     <%= f.input :starting_stack, label: 'Stack de départ', input_html: { min: 0, step: 500 } %>
-    <%= f.input :color, label: 'Thème', as: :color %>
+    <%= f.input :color, label: 'Thème couleur', as: :color %>
+    <%= f.input :font_color, label: 'Couleur de Police', as: :color %>
     <%= f.button :submit, class: 'btn btn-danger btn-block' %>
   <% end %>
 <br>

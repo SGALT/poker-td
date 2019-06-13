@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_29_222201) do
+ActiveRecord::Schema.define(version: 2019_06_13_072420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,10 +39,9 @@ ActiveRecord::Schema.define(version: 2019_05_29_222201) do
     t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "photo"
-    t.string "photo_opt"
     t.integer "remaining_attendees"
     t.datetime "next_break"
+    t.string "font_color"
   end
 
   create_table "users", force: :cascade do |t|
