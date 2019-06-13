@@ -1,14 +1,4 @@
 <div class="screen container-fluid">
-  <!-- DATADATADATADATA -->
-  <!-- set i as current active round order nb -->
-  <%# if !@tournament.rounds.where(state: "actived")[0].nil? %>
-    <%# i = @tournament.rounds.where(state: "actived")[0].order_nb %>
-
-
-  <!-- set tournament round variable -->
-    <%# tournament_round = @tournament.rounds.where(order_nb: i)[0] %>
-    <%# next_round = @tournament.rounds.where(order_nb: i+ 1)[0] %>
-  <%# end %>
 
   <!-- FIRST LINE SHOW -->
   <div class="first-line d-flex flex-column align-items-end justify-content-center">
@@ -25,7 +15,7 @@
   <!-- SECOND LINE SHOW -->
   <div class="second-line title row mx-auto">
     <div class="logo col-3 d-flex align-items-start justify-content-center">
-      <%= cl_image_tag @tournament.photo, width: 200, height: 200, crop: :fit, class: "photo" %>
+      <%= image_tag 'logo.png', class: "photo" %>
     </div>
     <!-- CLOCK -->
     <div class="clock col-6 d-flex align-items-start justify-content-center">
@@ -60,7 +50,7 @@
     </div>
     <!-- /CLOCK -->
     <div class="logo col-3 d-flex align-items-start justify-content-center">
-      <%= cl_image_tag @tournament.photo_opt, width: 200, height: 200, crop: :fit, class: "photo" %>
+      <%= image_tag 'logo.png', class: "photo" %>
     </div>
   </div>
 

@@ -52,22 +52,6 @@
 <!-- END OF CLOCK -->
 
 
-    <div class="row">
-      <div class="col-sm-12 col-md-6">
-        <%= f.input :photo, label: 'Photo 1' %>
-        <%= f.input :photo_cache, as: :hidden %>
-      </div>
-      <div class="col-sm-12 col-md-6">
-        <%= cl_image_tag @tournament.photo, width: 150, height: 150, crop: :fit, class: "mr-2" %>
-      </div>
-      <div class="col-sm-12 col-md-6">
-        <%= f.input :photo_opt, label: 'Photo 2' %>
-        <%= f.input :photo_opt_cache, as: :hidden %>
-      </div>
-      <div class="col-sm-12 col-md-6">
-        <%= cl_image_tag @tournament.photo_opt, width: 150, height: 150, crop: :fit %>
-      </div>
-    </div>
     <%= f.input :color, label: 'Thème', as: :color %>
     <%= f.button :submit, class: 'btn btn-danger btn-block' %>
   <% end %>
