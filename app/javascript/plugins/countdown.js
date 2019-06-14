@@ -5,7 +5,7 @@ if(!(document.getElementsByClassName("screen")[0] == undefined)) {
     xhr_object = new XMLHttpRequest();
     xhr_object.open("GET", location, true);
     xhr_object.onreadystatechange = function() {
-    if(xhr_object.readyState == 4 && (!xhr_object.responseText.includes(remain) || !xhr_object.responseText.includes(document.getElementsByClassName("clock")[0].lastElementChild.className))) document.location.reload(true);
+    if(xhr_object.readyState == 4 && (!xhr_object.responseText.includes(remain) || !xhr_object.responseText.includes(clock))) document.location.reload(true);
     }
     xhr_object.send(null);
   }, 1000)

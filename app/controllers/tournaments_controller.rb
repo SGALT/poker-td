@@ -1,8 +1,10 @@
 class TournamentsController < ApplicationController
-  before_action :set_tournament, only: [:show, :edit, :update, :destroy, :busted]
+  before_action :set_tournament, only: %i[
+    show edit update destroy busted start_countdown pause_countdown reset_tournament
+  ]
 
   def index
-    @tournaments = Tournament.all
+    @tournaments = policy_scope(Tournament)
   end
 
   def show
@@ -23,18 +25,18 @@ class TournamentsController < ApplicationController
 
   def busted
     busted_nb = params[:busted].to_i
-    if (@tournament.remaining_attendees += busted_nb) >= 1
-      @tournament.save
-    end
+    @tournament.save if (@tournament.remaining_attendees += busted_nb) >= 1
     redirect_to edit_tournament_path(@tournament)
   end
 
   def new
     @tournament = Tournament.new
+    authorize @tournament
   end
 
   def create
     @tournament = Tournament.new(tournament_params)
+    authorize @tournament
     @tournament.remaining_attendees = @tournament.attendees_nb
     if @tournament.save
       redirect_to tournaments_path
@@ -56,6 +58,38 @@ class TournamentsController < ApplicationController
   def destroy
     @tournament.destroy
     redirect_to tournaments_path
+  end
+
+  def start_countdown
+    if @tournament.rounds.where(state: "actived")[0]
+      tournament_round = @tournament.rounds.where(state: "actived")[0]
+      tournament_round.ends_at = Time.now + tournament_round.counter
+      tournament_round.save
+    end
+    redirect_to edit_tournament_path(@tournament)
+  end
+
+  def pause_countdown
+    if @tournament.rounds.where(state: "actived")[0]
+      tournament_round = @tournament.rounds.where(state: "actived")[0]
+      tournament_round.counter = tournament_round.ends_at - Time.now
+      tournament_round.ends_at = nil
+      tournament_round.save
+      @tournament.next_break = nil
+      @tournament.save
+    end
+    redirect_to edit_tournament_path(@tournament)
+  end
+
+  def reset_tournament
+    @tournament.rounds.each do |round|
+      round.counter = round.duration * 60
+      round.pending!
+      round.ends_at = nil
+      round.save
+    end
+    @tournament.rounds.where(order_nb: 1)[0].actived!
+    redirect_to edit_tournament_path
   end
 
   private
@@ -105,6 +139,7 @@ class TournamentsController < ApplicationController
     else
       @tournament = Tournament.find(params[:tournament_id])
     end
+    authorize @tournament
   end
 
   def tournament_params
