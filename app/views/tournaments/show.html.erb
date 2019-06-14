@@ -31,7 +31,7 @@
         <%= @tournament.attendees_nb %>
       </p>
     </div>
-    <div class="col-6 d-flex align-items-start justify-content-center">
+    <div class="clock col-6 d-flex align-items-start justify-content-center">
 
       <% if @tournament_round %>
         <span class="time-data" data-url="<%= @tournament_round.ends_at %>">
@@ -65,7 +65,7 @@
       <p>
         Joueurs Restants :
       </p>
-      <p>
+      <p class="remain">
         <%= @tournament.remaining_attendees %>
       </p>
     </div>

@@ -30,7 +30,17 @@
     <!-- countdown program -->
     <% if @tournament_round && @tournament_round.ends_at.nil? %>
       <p>
-        <%= (@tournament_round.counter / 60).to_i %>  : <%= (@tournament_round.counter % ((1000 * 60) / 1000)).to_i %>
+        <% min = (@tournament_round.counter / 60).to_i %>
+        <% sec = (@tournament_round.counter % ((1000 * 60) / 1000)).to_i %>
+        <% if min > 9 && sec > 9 %>
+          <%= min %>:<%= sec %>
+        <% elsif min > 9 && sec <= 9 %>
+          <%= min %>:0<%= sec %>
+        <% elsif min < 9 && sec > 9 %>
+          0<% min %>:<%= sec %>
+        <% elsif min < 9 && sec <= 9 %>
+          0<%= min %>:0<%= sec %>
+        <% end %>
       </p>
     <% else %>
       <% if @tournament.rounds.order(:order_nb).last.ended? %>
@@ -43,9 +53,9 @@
   <% end %>
 
 
-  <%= link_to 'start',start_countdown_tournament_round_path(@tournament), method: :post, class: 'btn btn-primary' %>
-  <%= link_to 'pause',pause_countdown_tournament_round_path(@tournament), method: :post, class: 'btn btn-info' %>
-  <%= link_to 'reset',reset_tournament_tournament_round_path(@tournament), method: :post, class: 'btn btn-danger', data: { confirm: "Etes vous sûr ?" } %>
+  <%= link_to 'start',start_countdown_tournament_path(@tournament), method: :post, class: 'btn btn-primary' %>
+  <%= link_to 'pause',pause_countdown_tournament_path(@tournament), method: :post, class: 'btn btn-info' %>
+  <%= link_to 'reset',reset_tournament_tournament_path(@tournament), method: :post, class: 'btn btn-danger', data: { confirm: "Etes vous sûr ?" } %>
   <%= link_to 'Tournament Page', tournament_path(@tournament), class: "btn btn-dark", target: "new" %>
 </div>
 
