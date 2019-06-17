@@ -13,7 +13,7 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
-    <% unless params[:action] == "show" %>
+    <% unless params[:action] == "show" || params[:action] == "home" %>
       <%= render 'shared/navbar' %>
     <% end %>
     <%= render 'shared/flashes' %>
