@@ -4,7 +4,7 @@
       <li class="list-group-item border border-dark d-flex justify-content-between mb-2">
         <%= tournament.title %>
         <%= link_to 'Gestion', edit_tournament_path(tournament) %>
-        <%= link_to 'Screen', tournament_path(tournament) %>
+        <%= link_to 'Screen', tournament_path(tournament), target: "new" %>
         <%= link_to 'Supprimer', tournament_path(tournament), method: :delete, data: { confirm: "Etes vous sûr ?" } %>
         <%= link_to 'copier le tournoi', tournament_copy_path(tournament), method: :post %>
       </li>
