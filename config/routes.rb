@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'tournaments#index'
+  root to: 'pages#home'
 
   resources :tournaments do
     post "busted"

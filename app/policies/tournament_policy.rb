@@ -37,6 +37,10 @@ class TournamentPolicy < ApplicationPolicy
     true
   end
 
+  def copy?
+    true
+  end
+
   private
 
   def user_is_owner_or_admin?
