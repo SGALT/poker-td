@@ -18,8 +18,9 @@ class TournamentsController < ApplicationController
     else
       tournament = Tournament.find(params[:tournament_id])
     end
-    new_tournament = tournament.dup
-    new_tournament.save
+    @tournament = tournament.amoeba_dup
+    authorize @tournament
+    @tournament.save
     redirect_to tournaments_path
   end
 
