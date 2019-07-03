@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
+  get 'infos', to: "pages#infos", as: :infos
 
   resources :tournaments do
     post "busted"

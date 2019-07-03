@@ -9,10 +9,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active d-flex align-items-center">
-        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+        <%= link_to "Accueil", root_path, class: "nav-link" %>
       </li>
       <li class="nav-item active d-flex align-items-center">
-        <a class="nav-link" href="#">A propos</a>
+        <%= link_to "A propos", infos_path, class: "nav-link" %>
       </li>
       <li class="nav-item dropdown navbar-brand">
         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -20,6 +20,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <% if user_signed_in? %>
+          <%= link_to "Mon TD", tournaments_path, class: "dropdown-item" %>
           <%= link_to "Mon compte", edit_user_registration_path(current_user), class: "dropdown-item" %>
           <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
         <% else %>
